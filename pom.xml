@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
 
     <properties>
+        <ezbake.version>${project.version}</ezbake.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <slf4j.version>1.7.6</slf4j.version>
     </properties>
