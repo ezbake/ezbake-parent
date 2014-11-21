@@ -13,8 +13,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <slf4j.version>1.7.6</slf4j.version>
-        <!--<release.repository>https://oss.sonatype.org/service/local/staging/deploy/maven2/</release.repository>-->
-        <!--<snapshot.repository>https://oss.sonatype.org/content/repositories/snapshots/</snapshot.repository>-->
+
+        <!-- Note: The following 2 properties are required to be set (in a user profile or
+             on the command line) before running the deploy goal -->
+        <!--<release.repository>[url of release repository]</release.repository>-->
+        <!--<snapshot.repository>[url of snapshot repository]</snapshot.repository>-->
     </properties>
 
     <distributionManagement>
