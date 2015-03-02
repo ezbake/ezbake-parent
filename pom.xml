@@ -99,9 +99,9 @@
     </dependencyManagement>
 
     <build>
-	    <pluginManagement>
-	        <plugins>
-	            <plugin>
+        <pluginManagement>
+            <plugins>
+                <plugin>
                     <groupId>org.apache.rat</groupId>
                     <artifactId>apache-rat-plugin</artifactId>
                     <version>0.11</version>
