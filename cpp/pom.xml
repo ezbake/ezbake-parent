@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--   Copyright (C) 2013-2014 Computer Sciences Corporation
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. -->
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ezbake</groupId>
+        <artifactId>ezbake-parent</artifactId>
+        <version>2.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>ezbake-cpp-parent</artifactId>
+    <packaging>pom</packaging>
+
+    <properties>
+        <native.build.skip>false</native.build.skip>
+        <!-- NOTE: debug must be false for optimize to be used -->
+        <native.debug>true</native.debug>
+        <native.optimize>none</native.optimize>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.github.maven-nar</groupId>
+                    <artifactId>nar-maven-plugin</artifactId>
+                    <version>3.1.0</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <skip>${native.build.skip}</skip>
+                        <cpp>
+                            <name>g++</name>
+                            <debug>${native.debug}</debug>
+                            <optimize>${native.optimize}</optimize>
+                            <options>
+                                <option>-fmessage-length=0</option>
+                                <option>-std=c++0x</option>
+                                <option>-Wall</option>
+                                <option>-Wpointer-arith</option>
+                            </options>
+                        </cpp>
+                        <libraries>
+                            <library>
+                                <type>shared</type>
+                            </library>
+                        </libraries>
+                        <linker>
+                            <name>g++</name>
+                        </linker>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.rat</groupId>
+                    <artifactId>apache-rat-plugin</artifactId>
+                    <configuration>
+                        <excludes combine.children="append">
+                            <exclude>**/contrib/**</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>rpm-maven-plugin</artifactId>
+                    <version>2.1.1</version>
+                    <executions>
+                        <execution>
+                            <id>generate-rpm</id>
+                            <goals>
+                                <goal>rpm</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <vendor>EzBake.IO</vendor>
+                        <license>ASL 2.0</license>
+                        <needarch>true</needarch>
+                        <defineStatements>
+                            <defineStatement>_unpackaged_files_terminate_build 0</defineStatement>
+                        </defineStatements>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
